@@ -1,0 +1,18 @@
+header, div.layout-3col {
+  width: 50%;
+  margin: 0 auto;
+}
+
+nav.main-menu {
+  float: right;
+  background-color: lightblue;
+  color: white;
+}
+
+div.layout-3col {
+  margin-top: 5%;
+}
+
+div.content-narrow {
+  background-color: lightgrey;
+}

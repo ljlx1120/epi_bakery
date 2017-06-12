@@ -1,0 +1,12 @@
+name = zing theme
+core = 7.x
+engine = phptemplate
+
+stylesheets[all][] = css/print.css
+stylesheets[all][] = css/mystyles.css
+scripts[] = js/script.js
+
+regions[header] = First sidebar
+regions[help] = Help
+regions[content] = Content
+regions[footer] = Footer

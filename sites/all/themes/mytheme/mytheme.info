@@ -1,0 +1,11 @@
+name = mytheme theme
+core = 7.x
+engine = phptemplate
+
+stylesheets[all][] = css/styles.css
+scripts[] = js/scripts.js
+
+regions[header] = First sidebar
+regions[help] = Help
+regions[content] = Content
+regions[footer] = Footer

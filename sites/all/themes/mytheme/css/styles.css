@@ -1,0 +1,12 @@
+div#header {
+  background-color: lightblue;
+  float: right;
+}
+#body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+div.frame {
+  background-color: lightgrey;
+}

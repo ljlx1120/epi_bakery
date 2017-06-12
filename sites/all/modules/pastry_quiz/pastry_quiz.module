@@ -1,10 +1,5 @@
 <?php
 
-// TO DO:
-// 1. fix everything
-// 2. write at least two more questions
-// 3. make suggestions based on questions
-
 function pastry_quiz_menu() {
     $items['quiz'] = array(
         'title' => 'What should I eat!?',
@@ -20,6 +15,18 @@ function pastry_quiz_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items['quiz_question_2'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('quiz_form2'),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items['quiz_question_3'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('quiz_form3'),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
     $items['quiz_results'] = array(
         'title' => 'Quiz Results!',
@@ -27,9 +34,9 @@ function pastry_quiz_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-
     return $items;
 }
+
 function quiz_form() {
   $form['gluten'] = array(
       '#title' => 'Gluten Intollerance',
@@ -41,41 +48,74 @@ function quiz_form() {
       ),
       '#required' => TRUE,
   );
+  $form['submit'] = array(
+          '#type' => 'submit',
+          '#value' => 'submit',
+  );
+  return $form;
+}
+
+function quiz_form2() {
+  $form['sweetsoure'] = array(
+      '#title' => 'Sweet or Soure?',
+      '#type' => 'radios',
+      '#description' => t('Do you prefer sweet or soure?'),
+      '#options' => array(
+          t('Sweet'),
+          t('Soure'),
+      ),
+      '#required' => TRUE,
+  );
+  $form['submit'] = array(
+          '#type' => 'submit',
+          '#value' => 'submit',
+  );
+  return $form;
+}
+
+function quiz_form3() {
+  $form['chicken'] = array(
+      '#title' => 'Chicken feet',
+      '#type' => 'radios',
+      '#description' => t('Do you like chicken feet?'),
+      '#options' => array(
+          t('Yes'),
+          t('No'),
+      ),
+      '#required' => TRUE,
+  );
 
   $form['submit'] = array(
           '#type' => 'submit',
           '#value' => 'submit',
   );
-
   return $form;
 }
 
 function start_form() {
-    // $form['gluten'] = array(
-    //     '#title' => 'Gluten Intollerance',
-    //     '#type' => 'radios',
-    //     '#description' => t('Are you gluten intollerant?'),
-    //     '#options' => array(
-    //         t('Yes'),
-    //         t('No'),
-    //     ),
-    //     '#required' => TRUE,
-    // );
-
     $form['submit'] = array(
         '#type' => 'submit',
         '#value' => 'submit',
     );
-
     return $form;
 }
 
 function quiz_success() {
-  $gluten = $_SESSION['values']['gluten'];
-  if ($gluten) {
-    return '<p>get a donut!</p>';
+  $gluten = $_SESSION['gluten'];
+  $sweetsoure = $_SESSION['sweetsoure'];
+  $chicken = $_SESSION['chicken'];
+  if ($gluten && $chicken && $sweetsoure) {
+    return '<p>You can try sweet soure chicken bread!</p>';
+  } else if ($gluten && $chicken) {
+    return "<p>Chicken Pie. Yay!</p>";
+  } else if ($gluten && $sweetsoure){
+    return "<p>How about a sweet source pork bread?</p>";
+  } else if ($chicken && $sweetsoure){
+    return "<p>Sweet soure chicken bread</p>";
+  } else if ($sweetsoure){
+    return "<p>We have gluten free sweet sour bread!</p>";
   } else {
-    return "<p>cool! we've got stuff for you too!/p>";
+    return "<p>Gluten free Tomato bread!</p>";
   }
 }
 
@@ -87,5 +127,15 @@ function quiz_form_submit($form, &$form_state) {
   $form['gluten']['default_value'] = variable_get('comment_preview', 1);
   $gluten = $form_state['values']['gluten'];
   $_SESSION['gluten'] = $gluten;
+  $form_state['redirect'] = 'quiz_question_2';
+}
+function quiz_form2_submit($form, &$form_state) {
+  $sweetorsavory = $form_state['values']['sweetorsavory'];
+  $_SESSION['sweetorsavory'] = $sweetorsavory;
+  $form_state['redirect'] = 'quiz_question_3';
+}
+function quiz_form3_submit($form, &$form_state) {
+  $nuts = $form_state['values']['nuts'];
+  $_SESSION['nuts'] = $nuts;
   $form_state['redirect'] = 'quiz_results';
 }

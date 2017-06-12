@@ -130,12 +130,12 @@ function quiz_form_submit($form, &$form_state) {
   $form_state['redirect'] = 'quiz_question_2';
 }
 function quiz_form2_submit($form, &$form_state) {
-  $sweetorsavory = $form_state['values']['sweetorsavory'];
-  $_SESSION['sweetorsavory'] = $sweetorsavory;
+  $sweetsoure = $form_state['values']['sweetsoure'];
+  $_SESSION['sweetsoure'] = $sweetsoure;
   $form_state['redirect'] = 'quiz_question_3';
 }
 function quiz_form3_submit($form, &$form_state) {
-  $nuts = $form_state['values']['nuts'];
-  $_SESSION['nuts'] = $nuts;
+  $chicken = $form_state['values']['chicken'];
+  $_SESSION['chicken'] = $chicken;
   $form_state['redirect'] = 'quiz_results';
 }

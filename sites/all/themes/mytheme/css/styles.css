@@ -1,6 +1,6 @@
 div#header {
-  background-color: lightblue;
   float: right;
+  padding-top: 5%;
 }
 #body {
   width: 80%;
@@ -8,5 +8,13 @@ div#header {
 }
 
 div.frame {
-  background-color: black;
+  background-color: lightgrey;
+}
+
+#content {
+  padding-top: 5%;
+}
+
+#main {
+  border: 1px red solid;
 }
